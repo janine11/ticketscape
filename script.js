@@ -1,5 +1,14 @@
 document.addEventListener('DOMContentLoaded', (e) => {
     console.log('document ready');
+    fetch(`https://app.ticketmaster.com/discovery/v2/events.json?&apikey=TB1crWfpFo6usraxXEiFhOrljk8GgugE`)
+    .then(response => response.json())
+    .then(eventData =>    {
+        console.log(eventData)      
+navbar
+        })
+
+    
+
 
 })
 // store information regarding the last time the results were updated.
@@ -11,20 +20,22 @@ const lastUpdated = document.lastModified;
 // input and produce the proper results in card format on the page
 const myForm = document.getElementById('search-form');
 myForm.addEventListener(('submit'), (e) => {
+    
     e.preventDefault();
     // store the values of each search criteria in its own variable
     const searchCity = document.getElementById('search-bar-city').value
     const searchState = document.getElementById('search-bar-state').value
     const searchKeyword = document.getElementById('search-bar-keyword').value
     // conditional for only city criteria
+    
     if (searchCity != "" && searchState == "" && searchKeyword == "") {
         const urlEncodedSearchString = encodeURIComponent(searchCity)
     fetch(`https://app.ticketmaster.com/discovery/v2/events.json?city=${urlEncodedSearchString}&apikey=TB1crWfpFo6usraxXEiFhOrljk8GgugE`)
     .then(response => response.json())
     .then(eventData =>    {
         document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)      
-         })
-    }
+        })
+} 
     // conditional for state only criteria
     else if (searchCity == "" && searchState != "" && searchKeyword == "") {
         const urlEncodedSearchString = encodeURIComponent(searchState)
@@ -124,3 +135,43 @@ function renderResults(resultsArray) {
     })
     return resultsHtmlArray.join('');
 }
+const music = document.getElementById('pills-music-tab')
+music.addEventListener('click', (e) => {
+    
+    e.preventDefault()
+    fetch(`https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&apikey=TB1crWfpFo6usraxXEiFhOrljk8GgugE`)
+    .then(response => response.json())
+    .then(eventData =>    {
+        document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)      
+        })
+})
+const sports = document.getElementById('pills-sport-tab')
+sports.addEventListener('click', (e) => {
+    
+    e.preventDefault()
+    fetch(`https://app.ticketmaster.com/discovery/v2/events.json?classificationName=sports&apikey=TB1crWfpFo6usraxXEiFhOrljk8GgugE`)
+    .then(response => response.json())
+    .then(eventData =>    {
+        document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)      
+        })
+})
+const artTheatre = document.getElementById('pills-artTheatre-tab')
+artTheatre.addEventListener('click', (e) => {
+    
+    e.preventDefault()
+    fetch(`https://app.ticketmaster.com/discovery/v2/events.json?classificationName=arts&apikey=TB1crWfpFo6usraxXEiFhOrljk8GgugE`)
+    .then(response => response.json())
+    .then(eventData =>    {
+        document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)      
+        })
+})
+const family = document.getElementById('pills-family-tab')
+family.addEventListener('click', (e) => {
+    
+    e.preventDefault()
+    fetch(`https://app.ticketmaster.com/discovery/v2/events.json?classificationName=family&apikey=TB1crWfpFo6usraxXEiFhOrljk8GgugE`)
+    .then(response => response.json())
+    .then(eventData =>    {
+        document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)      
+        })
+})
