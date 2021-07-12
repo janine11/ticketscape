@@ -39,13 +39,43 @@
                     </div>
                 </form>
             </div>
+            <div class="row">
+                <div class="col-12 justify-content-center">
+                    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="pills-music-tab" data-toggle="pill" href="#pills-music"
+                                role="tab" aria-controls="pills-music" aria-selected="true"><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-file-music-fill" viewBox="0 0 16 16">
+                                    <path
+                                        d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm-.5 4.11v1.8l-2.5.5v5.09c0 .495-.301.883-.662 1.123C7.974 12.866 7.499 13 7 13c-.5 0-.974-.134-1.338-.377-.36-.24-.662-.628-.662-1.123s.301-.883.662-1.123C6.026 10.134 6.501 10 7 10c.356 0 .7.068 1 .196V4.41a1 1 0 0 1 .804-.98l1.5-.3a1 1 0 0 1 1.196.98z" />
+                                </svg>Music</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-sport-tab" data-toggle="pill" href="#pills-sport" role="tab"
+                                aria-controls="pills-sport" aria-selected="false">Sport</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                                aria-haspopup="true" aria-expanded="false">More</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Art&Theatre</a>
+                                <a class="dropdown-item" href="#">FAmily</a>
+                            </div>
+                        </li>
+                </div>
+                </ul>
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-music" role="tabpanel"
+                        aria-labelledby="pills-music-tab">
+                    </div>
+                    <div class="tab-pane fade show active" id="pills-sport" role="tabpanel" aria-labelledby="pills-sport-tab">
+                    </div>
+                    <div class="tab-pane fade show active" id="pills-more" role="tabpanel" aria-labelledby="pills-more-tab">
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <!-- Everything above this line contains the search bar & up! -->
-        <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
-        <!-- -------------                                                                                                                    ---------------------------------- -->
-        <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
-        <!-- Everything below this line contains search result cards! -->
 
         <div class="row">
             <div class="col-12 results">                
@@ -151,7 +181,7 @@
             </div>
         </div>
     </div>
-    
+    <div id="map"></div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
@@ -162,7 +192,10 @@
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    
+    <script src="google.js"></script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkoylVvZXvTjhW1WlbW8_iGIQHhD_H0ts&callback=initMap&libraries=&v=weekly"
+        async></script>
 </body>
 
 </html>
