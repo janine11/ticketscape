@@ -1,6 +1,10 @@
 document.addEventListener('DOMContentLoaded', (e) => {
     console.log('document ready');
-    
+    fetch(`https://app.ticketmaster.com/discovery/v2/events.json?&apikey=TB1crWfpFo6usraxXEiFhOrljk8GgugE`)
+    .then(response => response.json())
+    .then(eventData =>    {
+        console.log(eventData)      
+         })
 
 })
 // store information regarding the last time the results were updated.
