@@ -4,9 +4,11 @@ document.addEventListener('DOMContentLoaded', (e) => {
     .then(response => response.json())
     .then(eventData =>    {
         console.log(eventData)      
+navbar
         })
 
     
+
 
 })
 // store information regarding the last time the results were updated.
