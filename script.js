@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', (e) => {
     console.log('document ready');
+    
 
 })
 // store information regarding the last time the results were updated.
