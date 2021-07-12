@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', (e) => {
-    console.log('document ready')
+    console.log('document ready');
 
-
+})
 // store information regarding the last time the results were updated.
 const lastUpdated = document.lastModified;
 
@@ -108,7 +108,7 @@ function renderResults(resultsArray) {
             <div class="row g-0">
                 <div class="col-md-4">
                     <img src=${currentResult.images[1].url}
-                        class="img-fluid rounded-start" alt="...">
+                        class="img-fluid rounded-start"  alt="No Image Available">
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
@@ -124,14 +124,3 @@ function renderResults(resultsArray) {
     })
     return resultsHtmlArray.join('');
 }
-
-let map;
-
-function initMap() {
-  map = new google.maps.Map(document.getElementById("map"), {
-    center: { lat: -34.397, lng: 150.644 },
-    zoom: 8,
-  });
-}
-
-})
