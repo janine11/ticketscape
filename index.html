@@ -7,6 +7,7 @@
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
     <link rel="stylesheet" href="index.css" />
     <script src="script.js" async defer></script>
+    
 </head>
 
 <body>
@@ -27,7 +28,7 @@
                         <input class="form-control search-bar" id="search-bar-city" placeholder="Search City...">
                         <!-- <input class="form-control search-bar" id="search-bar-state" placeholder="Search By State..." /> -->
                         <select name="search-bar-state" id="search-bar-state">
-                            <option disabled selected value="">Search State</option>
+                            <option  selected value="">Search State</option>
                             <option value="TX">Texas</option>
                         </select>
                         
@@ -41,6 +42,7 @@
         
         <div class="row">
             <div class="col-12 results">
+                <div id="map"></div>
                 <!-- EVENTS SHOW UP HERE! -->
                 <div class="row" id="results-box">
                     <div class="col-12 col-md-6 ">
@@ -111,7 +113,9 @@
             </div>
         </div>
     </div>
-
+    <script async
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkoylVvZXvTjhW1WlbW8_iGIQHhD_H0ts&callback=initMap">
+    </script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
