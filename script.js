@@ -1,14 +1,14 @@
 document.addEventListener('DOMContentLoaded', (e) => {
-    console.log('document ready');
-    fetch(`https://app.ticketmaster.com/discovery/v2/events.json?&apikey=TB1crWfpFo6usraxXEiFhOrljk8GgugE`)
-    .then(response => response.json())
-    .then(eventData =>    {
-        console.log(eventData)      
-navbar
-        })
-
+    console.log('document ready'); 
     
-
+document.addEventListener('click', (e) => {  
+        // will need to add a class to each button called add button  
+    if (e.target.classList.contains("add-event")) {
+        e.preventDefault();        
+        let eventID = e.target.dataset.eventId
+        saveToFavorites(eventID)
+    }        
+}) 
 
 })
 // store information regarding the last time the results were updated.
@@ -114,27 +114,52 @@ myForm.addEventListener(('submit'), (e) => {
 function renderResults(resultsArray) {
     const resultsHtmlArray = resultsArray.map((currentResult) => {
     console.log(currentResult)
-        return `<div class="col-12 col-md-6">
-        <div class="card mb-3" style="max-width: 540px;">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img src=${currentResult.images[1].url}
-                        class="img-fluid rounded-start"  alt="No Image Available">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title">${currentResult.name}</h5>
-                        <p class="card-text">Date: ${currentResult.dates.start.localDate}<br> Time: ${currentResult.dates.start.localTime}</p>
-                        <p class="card-text"><small class="text-muted">Last updated:<br>${lastUpdated}</small></p>
-                        <a class="btn btn-primary" href=${currentResult.url} role="button">Buy Tickets</a>
+        return `
+    <div>    
+    <div class="row">
+        <div class="col-12 results">
+            <div class="row" id="results-box">
+                <div class="col-12 col-md-6">
+                    <div class="card mb-3" style="max-width: 540px;">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src=${currentResult.images[1].url}
+                                    class="img-fluid rounded-start" alt="...">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">${currentResult.name}</h5>
+                                    <h6 class="card-date-time">${currentResult.dates.start.localDate}<br> Time: ${currentResult.dates.start.localTime}</h6>
+                                    <h6 class="card-location-venue">${currentResult._embedded.venues[0].name}</h6>
+                                    <p class="card-last-update"><small class="text-muted">Last updated:<br>${lastUpdated}</small></p>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-2 ml-2 buttons-event-heart">
+                                        <button type="button" class="btn btn-primary" href=${currentResult.url}>Buy Tickets</button>
+                                        <a data-event-id="${currentResult.id}" style="border-color: white; background-color: white; outline: none;"><svg class="add-event" xmlns="http://www.w3.org/2000/svg" width="50" height="50"
+                                            fill="currentColor" class="bi bi-bookmark-heart" viewBox="0 0 16 16"
+                                            justify-content-right>
+                                            <path fill-rule="evenodd"
+                                                d="M8 4.41c1.387-1.425 4.854 1.07 0 4.277C3.146 5.48 6.613 2.986 8 4.412z" />
+                                            <path
+                                                d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
+                                        </svg></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>`
+
+
     })
     return resultsHtmlArray.join('');
 }
+
 const music = document.getElementById('pills-music-tab')
 music.addEventListener('click', (e) => {
     
@@ -175,3 +200,20 @@ family.addEventListener('click', (e) => {
         document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)      
         })
 })
+
+
+function saveToFavorites(eventID) {
+    const movie = eventData.find((currentEvent) => {
+        return currentevent.imdbID == movieID
+                
+    });
+    let eventJSON = localStorage.getItem('event');
+    let event = JSON.parse(eventJSON);
+    if (event == null) {
+        event = [];
+}
+    event.push(movie)
+    eventJSON = JSON.stringify(event);
+    localStorage.setItem('event', eventJSON);
+        
+}
