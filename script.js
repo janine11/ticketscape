@@ -1,13 +1,41 @@
 let eventDataObject
 document.addEventListener('DOMContentLoaded', (e) => {    
-    console.log('document ready'); 
-    
+    console.log('document ready');    
 
 
 })
 // store information regarding the last time the results were updated.
 const lastUpdated = document.lastModified;
+function renderMapLat(resultsArray) {
+    const resultsMapArray = resultsArray.map((currentResult) => {   
+        let latitude = currentResult._embedded.venues[0].location.latitude;
+        return latitude 
 
+    })
+    return resultsMapArray.join('');
+}
+function renderMaps(eventsArray) {
+    eventsArray.forEach((currentEvent) => {   
+        initMap(parseInt(currentEvent._embedded.venues[0].location.latitude),parseInt(currentEvent._embedded.venues[0].location.longitude), `map-${currentEvent.id}` )
+
+    })
+  
+}
+
+ function initMap(latitude, longitude, id) { 
+     console.log(id)   
+    const uluru = { lat: latitude, lng: longitude };
+    // The map, centered at Uluru
+    const map = new google.maps.Map(document.getElementById(id || "map"), {
+        zoom: 4,
+        center: uluru,
+    });
+    // The marker, positioned at Uluru
+    const marker = new google.maps.Marker({
+        position: uluru,
+        map: map,
+    });
+}
 
 
 // create a listener for the search bar that will take any combination of
@@ -28,7 +56,9 @@ myForm.addEventListener(('submit'), (e) => {
     .then(response => response.json())
     .then(eventData =>    {
         document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)      
-        eventDataObject = eventData 
+        eventDataObject = eventData
+              
+        renderMaps(eventData._embedded.events) 
         })
 } 
     // conditional for state only criteria
@@ -38,7 +68,7 @@ myForm.addEventListener(('submit'), (e) => {
     .then(response => response.json())
     .then(eventData =>    {
         document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)
-        console.log(eventData)
+        
         eventDataObject = eventData       
     })
     }
@@ -55,7 +85,7 @@ myForm.addEventListener(('submit'), (e) => {
             document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)
         }
         eventDataObject = eventData 
-        console.log(eventDataObject)           
+                 
     })
     }
     // conditional for city and state criteria only
@@ -66,7 +96,7 @@ myForm.addEventListener(('submit'), (e) => {
     .then(response => response.json())
     .then(eventData =>    {
         document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)
-        console.log(eventData)
+        
         eventDataObject = eventData           
     })
     }
@@ -78,7 +108,7 @@ myForm.addEventListener(('submit'), (e) => {
     .then(response => response.json())
     .then(eventData =>    {
         document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)
-        console.log(eventData)
+        
         eventDataObject = eventData             
     })
     }
@@ -90,7 +120,7 @@ myForm.addEventListener(('submit'), (e) => {
     .then(response => response.json())
     .then(eventData =>    {
         document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)
-        console.log(eventData)    
+            
         eventDataObject = eventData       
     })
     }
@@ -103,7 +133,7 @@ myForm.addEventListener(('submit'), (e) => {
     .then(response => response.json())
     .then(eventData =>    {
         document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)
-        console.log(eventData) 
+         
         eventDataObject = eventData           
     })
     }
@@ -114,8 +144,9 @@ myForm.addEventListener(('submit'), (e) => {
 // create a function that will take the array of results and make a new card
 // for each result to include certain information about the event
 function renderResults(resultsArray) {
-    const resultsHtmlArray = resultsArray.map((currentResult) => {
-    console.log(currentResult)
+    const resultsHtmlArray = resultsArray.map((currentResult) => {   
+    
+        
         return `
     <div>    
     <div class="row">
@@ -134,6 +165,7 @@ function renderResults(resultsArray) {
                                     <h6 class="card-date-time">${currentResult.dates.start.localDate}<br> Time: ${currentResult.dates.start.localTime}</h6>
                                     <h6 class="card-location-venue">${currentResult._embedded.venues[0].name}</h6>
                                     <p class="card-last-update"><small class="text-muted">Last updated:<br>${lastUpdated}</small></p>
+                                    <div id="map-${currentResult.id}"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col mb-2 ml-2 buttons-event-heart">
@@ -156,7 +188,7 @@ function renderResults(resultsArray) {
         </div>
     </div>
     </div>`
-
+     
 
     })
     return resultsHtmlArray.join('');
@@ -209,10 +241,9 @@ document.addEventListener('click', (e) => {
         let eventID = e.target.dataset.eventId        
         saveToFavorites(eventID)
     } 
-}) 
+})
 
-function saveToFavorites(eventID) {
-    console.log(eventDataObject)
+function saveToFavorites(eventID) {    
     const eventObject = eventDataObject._embedded.events.find((currentEvent) => {
         return currentEvent.id == eventID                
     });
@@ -225,3 +256,4 @@ function saveToFavorites(eventID) {
     eventJSON = JSON.stringify(event);
     localStorage.setItem('event', eventJSON);        
 }
+
