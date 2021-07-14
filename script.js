@@ -30,80 +30,96 @@ myForm.addEventListener(('submit'), (e) => {
 
     if (searchCity != "" && searchState == "" && searchKeyword == "") {
         const urlEncodedSearchString = encodeURIComponent(searchCity)
-        fetch(`https://app.ticketmaster.com/discovery/v2/events.json?city=${urlEncodedSearchString}&apikey=TB1crWfpFo6usraxXEiFhOrljk8GgugE`)
-            .then(response => response.json())
-            .then(eventData => {
-                document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)
-            })
-    }
+
+    fetch(`https://app.ticketmaster.com/discovery/v2/events.json?city=${urlEncodedSearchString}&apikey=TB1crWfpFo6usraxXEiFhOrljk8GgugE`)
+    .then(response => response.json())
+    .then(eventData =>    {
+        document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)      
+        eventDataObject = eventData 
+        })
+} 
     // conditional for state only criteria
     else if (searchCity == "" && searchState != "" && searchKeyword == "") {
         const urlEncodedSearchString = encodeURIComponent(searchState)
-        fetch(`https://app.ticketmaster.com/discovery/v2/events.json?stateCode=${urlEncodedSearchString}&apikey=TB1crWfpFo6usraxXEiFhOrljk8GgugE`)
-            .then(response => response.json())
-            .then(eventData => {
-                document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)
-                console.log(eventData)
-            })
+    fetch(`https://app.ticketmaster.com/discovery/v2/events.json?stateCode=${urlEncodedSearchString}&apikey=TB1crWfpFo6usraxXEiFhOrljk8GgugE`)
+    .then(response => response.json())
+    .then(eventData =>    {
+        document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)
+        console.log(eventData)
+        eventDataObject = eventData       
+    })
     }
     // conditional for keyword only
     else if (searchCity == "" && searchState == "" && searchKeyword != "") {
-        const urlEncodedSearchString = encodeURIComponent(searchKeyword)
-        fetch(`https://app.ticketmaster.com/discovery/v2/events.json?keyword=${urlEncodedSearchString}&apikey=TB1crWfpFo6usraxXEiFhOrljk8GgugE`)
-            .then(response => response.json())
-            .then(eventData => {
-                if (eventData.page.totalPages == 0) {
-                    document.getElementById('results-box').innerHTML = "There are no results matching your criteria"
-                }
-                else {
-                    document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)
-                }
-            })
+        const urlEncodedSearchString = encodeURIComponent(searchKeyword)        
+    fetch(`https://app.ticketmaster.com/discovery/v2/events.json?keyword=${urlEncodedSearchString}&apikey=TB1crWfpFo6usraxXEiFhOrljk8GgugE`)
+    .then(response => response.json())
+    .then(eventData =>    {
+        if (eventData.page.totalPages == 0) {
+             document.getElementById('results-box').innerHTML = "There are no results matching your criteria"
+        }
+        else {
+            document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)
+        }
+        eventDataObject = eventData 
+        console.log(eventDataObject)           
+    })
+
     }
     // conditional for city and state criteria only
     else if (searchCity != "" && searchState != "" && searchKeyword == "") {
         const urlEncodedSearchString = encodeURIComponent(searchState)
         const urlEncodedSearchString2 = encodeURIComponent(searchCity)
-        fetch(`https://app.ticketmaster.com/discovery/v2/events.json?city=${urlEncodedSearchString2}&stateCode=${urlEncodedSearchString}&apikey=TB1crWfpFo6usraxXEiFhOrljk8GgugE`)
-            .then(response => response.json())
-            .then(eventData => {
-                document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)
-                console.log(eventData)
-            })
+
+    fetch(`https://app.ticketmaster.com/discovery/v2/events.json?city=${urlEncodedSearchString2}&stateCode=${urlEncodedSearchString}&apikey=TB1crWfpFo6usraxXEiFhOrljk8GgugE`)
+    .then(response => response.json())
+    .then(eventData =>    {
+        document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)
+        console.log(eventData)
+        eventDataObject = eventData           
+    })
     }
     // conditional for city and keyword only
     else if (searchCity != "" && searchState == "" && searchKeyword != "") {
         const urlEncodedSearchString = encodeURIComponent(searchCity)
         const urlEncodedSearchString2 = encodeURIComponent(searchKeyword)
-        fetch(`https://app.ticketmaster.com/discovery/v2/events.json?keyword=${urlEncodedSearchString2}&city=${urlEncodedSearchString}&apikey=TB1crWfpFo6usraxXEiFhOrljk8GgugE`)
-            .then(response => response.json())
-            .then(eventData => {
-                document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)
-                console.log(eventData)
-            })
+
+    fetch(`https://app.ticketmaster.com/discovery/v2/events.json?keyword=${urlEncodedSearchString2}&city=${urlEncodedSearchString}&apikey=TB1crWfpFo6usraxXEiFhOrljk8GgugE`)
+    .then(response => response.json())
+    .then(eventData =>    {
+        document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)
+        console.log(eventData)
+        eventDataObject = eventData             
+    })
+
     }
     // conditional for state and keyword only
     else if (searchCity == "" && searchState != "" && searchKeyword != "") {
         const urlEncodedSearchString = encodeURIComponent(searchState)
         const urlEncodedSearchString2 = encodeURIComponent(searchKeyword)
-        fetch(`https://app.ticketmaster.com/discovery/v2/events.json?keyword=${urlEncodedSearchString2}&stateCode=${urlEncodedSearchString}&apikey=TB1crWfpFo6usraxXEiFhOrljk8GgugE`)
-            .then(response => response.json())
-            .then(eventData => {
-                document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)
-                console.log(eventData)
-            })
+
+    fetch(`https://app.ticketmaster.com/discovery/v2/events.json?keyword=${urlEncodedSearchString2}&stateCode=${urlEncodedSearchString}&apikey=TB1crWfpFo6usraxXEiFhOrljk8GgugE`)
+    .then(response => response.json())
+    .then(eventData =>    {
+        document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)
+        console.log(eventData)    
+        eventDataObject = eventData       
+    })
+
     }
     // conditional for all three criteria
     else if (searchCity != "" && searchState != "" && searchKeyword != "") {
         const urlEncodedSearchString = encodeURIComponent(searchState)
         const urlEncodedSearchString2 = encodeURIComponent(searchCity)
         const urlEncodedSearchString3 = encodeURIComponent(searchKeyword)
-        fetch(`https://app.ticketmaster.com/discovery/v2/events.json?city=${urlEncodedSearchString2}&stateCode=${urlEncodedSearchString}&keyword=${urlEncodedSearchString3}&apikey=TB1crWfpFo6usraxXEiFhOrljk8GgugE`)
-            .then(response => response.json())
-            .then(eventData => {
-                document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)
-                console.log(eventData)
-            })
+
+    fetch(`https://app.ticketmaster.com/discovery/v2/events.json?city=${urlEncodedSearchString2}&stateCode=${urlEncodedSearchString}&keyword=${urlEncodedSearchString3}&apikey=TB1crWfpFo6usraxXEiFhOrljk8GgugE`)
+    .then(response => response.json())
+    .then(eventData =>    {
+        document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)
+        console.log(eventData) 
+        eventDataObject = eventData           
+    })
     }
 
 
@@ -235,29 +251,41 @@ artTheatre.addEventListener('click', (e) => {
         })
 })
 const family = document.getElementById('pills-family-tab')
-family.addEventListener('click', (e) => {
 
+family.addEventListener('click', (e) => {    
     e.preventDefault()
     fetch(`https://app.ticketmaster.com/discovery/v2/events.json?classificationName=family&apikey=TB1crWfpFo6usraxXEiFhOrljk8GgugE`)
-        .then(response => response.json())
-        .then(eventData => {
-            document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)
+    .then(response => response.json())
+    .then(eventData =>  {
+        document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)            
+
         })
 })
 
+document.addEventListener('click', (e) => {  
+        // will need to add a class to each button called add button  
+    if (e.target.classList.contains("add-event")) {
+        e.preventDefault();        
+        let eventID = e.target.dataset.eventId        
+        saveToFavorites(eventID)
+    } 
+}) 
 
 function saveToFavorites(eventID) {
-    const movie = eventData.find((currentEvent) => {
-        return currentevent.imdbID == movieID
+
+    console.log(eventDataObject)
+    const eventObject = eventDataObject._embedded.events.find((currentEvent) => {
+        return currentEvent.id == eventID                
 
     });
     let eventJSON = localStorage.getItem('event');
     let event = JSON.parse(eventJSON);
     if (event == null) {
         event = [];
-    }
-    event.push(movie)
+
+}
+    event.push(eventObject)
     eventJSON = JSON.stringify(event);
-    localStorage.setItem('event', eventJSON);
+    localStorage.setItem('event', eventJSON);        
 
 }
