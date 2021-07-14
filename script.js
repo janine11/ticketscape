@@ -1,14 +1,8 @@
-document.addEventListener('DOMContentLoaded', (e) => {
+let eventDataObject
+document.addEventListener('DOMContentLoaded', (e) => {    
     console.log('document ready'); 
     
-document.addEventListener('click', (e) => {  
-        // will need to add a class to each button called add button  
-    if (e.target.classList.contains("add-event")) {
-        e.preventDefault();        
-        let eventID = e.target.dataset.eventId
-        saveToFavorites(eventID)
-    }        
-}) 
+
 
 })
 // store information regarding the last time the results were updated.
@@ -34,6 +28,7 @@ myForm.addEventListener(('submit'), (e) => {
     .then(response => response.json())
     .then(eventData =>    {
         document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)      
+        eventDataObject = eventData 
         })
 } 
     // conditional for state only criteria
@@ -43,7 +38,8 @@ myForm.addEventListener(('submit'), (e) => {
     .then(response => response.json())
     .then(eventData =>    {
         document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)
-        console.log(eventData)      
+        console.log(eventData)
+        eventDataObject = eventData       
     })
     }
     // conditional for keyword only
@@ -57,7 +53,9 @@ myForm.addEventListener(('submit'), (e) => {
         }
         else {
             document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)
-        }           
+        }
+        eventDataObject = eventData 
+        console.log(eventDataObject)           
     })
     }
     // conditional for city and state criteria only
@@ -68,7 +66,8 @@ myForm.addEventListener(('submit'), (e) => {
     .then(response => response.json())
     .then(eventData =>    {
         document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)
-        console.log(eventData)          
+        console.log(eventData)
+        eventDataObject = eventData           
     })
     }
     // conditional for city and keyword only
@@ -79,7 +78,8 @@ myForm.addEventListener(('submit'), (e) => {
     .then(response => response.json())
     .then(eventData =>    {
         document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)
-        console.log(eventData)           
+        console.log(eventData)
+        eventDataObject = eventData             
     })
     }
     // conditional for state and keyword only
@@ -90,7 +90,8 @@ myForm.addEventListener(('submit'), (e) => {
     .then(response => response.json())
     .then(eventData =>    {
         document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)
-        console.log(eventData)          
+        console.log(eventData)    
+        eventDataObject = eventData       
     })
     }
     // conditional for all three criteria
@@ -102,7 +103,8 @@ myForm.addEventListener(('submit'), (e) => {
     .then(response => response.json())
     .then(eventData =>    {
         document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)
-        console.log(eventData)           
+        console.log(eventData) 
+        eventDataObject = eventData           
     })
     }
   
@@ -136,7 +138,7 @@ function renderResults(resultsArray) {
                                 <div class="row">
                                     <div class="col mb-2 ml-2 buttons-event-heart">
                                         <button type="button" class="btn btn-primary" href=${currentResult.url}>Buy Tickets</button>
-                                        <a data-event-id="${currentResult.id}" style="border-color: white; background-color: white; outline: none;"><svg class="add-event" xmlns="http://www.w3.org/2000/svg" width="50" height="50"
+                                        <a  style="border-color: white; background-color: white; outline: none;"><svg data-event-id=${currentResult.id} class="add-event" xmlns="http://www.w3.org/2000/svg" width="50" height="50"
                                             fill="currentColor" class="bi bi-bookmark-heart" viewBox="0 0 16 16"
                                             justify-content-right>
                                             <path fill-rule="evenodd"
@@ -191,29 +193,35 @@ artTheatre.addEventListener('click', (e) => {
         })
 })
 const family = document.getElementById('pills-family-tab')
-family.addEventListener('click', (e) => {
-    
+family.addEventListener('click', (e) => {    
     e.preventDefault()
     fetch(`https://app.ticketmaster.com/discovery/v2/events.json?classificationName=family&apikey=TB1crWfpFo6usraxXEiFhOrljk8GgugE`)
     .then(response => response.json())
-    .then(eventData =>    {
-        document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)      
+    .then(eventData =>  {
+        document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)            
         })
 })
 
+document.addEventListener('click', (e) => {  
+        // will need to add a class to each button called add button  
+    if (e.target.classList.contains("add-event")) {
+        e.preventDefault();        
+        let eventID = e.target.dataset.eventId        
+        saveToFavorites(eventID)
+    } 
+}) 
 
 function saveToFavorites(eventID) {
-    const movie = eventData.find((currentEvent) => {
-        return currentevent.imdbID == movieID
-                
+    console.log(eventDataObject)
+    const eventObject = eventDataObject._embedded.events.find((currentEvent) => {
+        return currentEvent.id == eventID                
     });
     let eventJSON = localStorage.getItem('event');
     let event = JSON.parse(eventJSON);
     if (event == null) {
         event = [];
 }
-    event.push(movie)
+    event.push(eventObject)
     eventJSON = JSON.stringify(event);
-    localStorage.setItem('event', eventJSON);
-        
+    localStorage.setItem('event', eventJSON);        
 }
