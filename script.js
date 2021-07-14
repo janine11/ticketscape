@@ -33,7 +33,7 @@ function renderMaps(eventsArray) {
 }
 
  function initMap(latitude, longitude, id) { 
-     console.log(id)   
+        
     const uluru = { lat: latitude, lng: longitude };
     // The map, centered at Uluru
     const map = new google.maps.Map(document.getElementById(id || "map"), {
@@ -67,8 +67,7 @@ myForm.addEventListener(('submit'), (e) => {
     .then(response => response.json())
     .then(eventData =>    {
         document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)      
-        eventDataObject = eventData
-              
+        eventDataObject = eventData              
         renderMaps(eventData._embedded.events) 
         })
 } 
@@ -79,7 +78,7 @@ myForm.addEventListener(('submit'), (e) => {
     .then(response => response.json())
     .then(eventData =>    {
         document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)
-        
+        renderMaps(eventData._embedded.events)
         eventDataObject = eventData       
     })
     }
@@ -95,6 +94,7 @@ myForm.addEventListener(('submit'), (e) => {
         else {
             document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)
         }
+        renderMaps(eventData._embedded.events)
         eventDataObject = eventData 
                  
     })
@@ -109,7 +109,7 @@ myForm.addEventListener(('submit'), (e) => {
     .then(response => response.json())
     .then(eventData =>    {
         document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)
-        
+        renderMaps(eventData._embedded.events)
         eventDataObject = eventData           
     })
     }
@@ -122,7 +122,7 @@ myForm.addEventListener(('submit'), (e) => {
     .then(response => response.json())
     .then(eventData =>    {
         document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)
-        
+        renderMaps(eventData._embedded.events)
         eventDataObject = eventData             
     })
 
@@ -136,7 +136,7 @@ myForm.addEventListener(('submit'), (e) => {
     .then(response => response.json())
     .then(eventData =>    {
         document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)
-            
+        renderMaps(eventData._embedded.events)    
         eventDataObject = eventData       
     })
 
@@ -151,7 +151,7 @@ myForm.addEventListener(('submit'), (e) => {
     .then(response => response.json())
     .then(eventData =>    {
         document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)
-         
+        renderMaps(eventData._embedded.events)
         eventDataObject = eventData           
     })
     }
@@ -167,7 +167,7 @@ myForm.addEventListener(('submit'), (e) => {
 function renderResults(resultsArray) {
 
     const resultsHtmlArray = resultsArray.map((currentResult) => {    
-        
+        console.log(currentResult)
 
         return `
             <div class="col-12 col-md-6">
@@ -182,9 +182,9 @@ function renderResults(resultsArray) {
                                 <div class="card-body">
                                     <h5 class="card-title">${currentResult.name}</h5>
                                     <h6 class="card-date-time">${currentResult.dates.start.localDate}<br> Time: ${currentResult.dates.start.localTime}</h6>
-                                    <h6 class="card-location-venue">${currentResult._embedded.venues[0].name}</h6>
+                                    <h6 class="card-location-venue">${currentResult._embedded.venues[0].city.name} @ ${currentResult._embedded.venues[0].name}</h6>
                                     <p class="card-last-update"><small class="text-muted">Last updated:<br>${lastUpdated}</small></p>
-                                    <div id="map-${currentResult.id}"></div>
+                                    
 
                             <div class="row">
                                 <div class="col mb-2 ml-2 buttons-event-heart">
@@ -220,20 +220,17 @@ function renderResults(resultsArray) {
                         <div class="modal-body">
                             <div class="row g-0">
                                 <div class="col-md-4">
-                                    <img src="https://images.pexels.com/photos/3408744/pexels-photo-3408744.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+                                    <img src=${currentResult.images[1].url}
                                         class="img-fluid rounded-start" alt="...">
-                                    <img src="https://images.pexels.com/photos/7009479/pexels-photo-7009479.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
-                                        class="img-fluid rounded-start" alt="...">
+                                    
 
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
-                                        <h5 class="card-title">Better Than Ezra</h5>
-                                        <h6 class="card-date-time">January 6, 2021 - 7:30pm</h6>
-                                        <h6 class="card-location-venue">Atlanta, GA @ State Farm Arena</h6>
-                                        <p class="card-ticketprice">$0-360</p>
-                                        <p class="card-last-update"><small class="text-muted">Last updated 3 mins
-                                                ago</small></p>
+                                        <h5 class="card-title">${currentResult.name}</h5>
+                                        <h6 class="card-date-time">${currentResult.dates.start.localDate}<br> Time: ${currentResult.dates.start.localTime}</h6>
+                                        <h6 class="card-location-venue">${currentResult._embedded.venues[0].city.name} @ ${currentResult._embedded.venues[0].name}</h6>                                        
+                                        <p class="card-last-update"><small class="text-muted">${lastUpdated}</small></p>
                                     </div>
                                     <div class="row">
                                         <div class="col mb-2 ml-2 buttons-event-heart">               
@@ -241,7 +238,7 @@ function renderResults(resultsArray) {
                                     </div>
                                 </div>
                             </div>
-                            <div class="map"> 
+                            <div style="height: 100px;" id="map-${currentResult.id}"></div> 
                             MAP goes here
                             </div>
                         </div>
@@ -251,9 +248,7 @@ function renderResults(resultsArray) {
                         </div>
                     </div>
                 </div>
-            </div>
-
-            `
+            </div>`
 
 
 
@@ -313,8 +308,7 @@ document.addEventListener('click', (e) => {
 })
 
 
-function saveToFavorites(eventID) {    
-
+function saveToFavorites(eventID) {
     const eventObject = eventDataObject._embedded.events.find((currentEvent) => {
         return currentEvent.id == eventID                
 
