@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // code here will execute after the document is loaded
   let favListJSON = localStorage.getItem('favList');
   let favList = JSON.parse(favListJSON)
-  console.log(favList)
+  // console.log(favList)
   // document.getElementById('event-container').innerHTML = renderEvents(favList);
 
   // const parsedData = JSON.parse(localStorage.getItem("event"));

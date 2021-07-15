@@ -1,7 +1,7 @@
 
 let eventDataObject
 document.addEventListener('DOMContentLoaded', (e) => {    
-    console.log('document ready');    
+    // console.log('document ready');    
 
 
     document.addEventListener('click', (e) => {
@@ -52,14 +52,13 @@ function renderMaps(eventsArray) {
 // input and produce the proper results in card format on the page
 const myForm = document.getElementById('search-form');
 myForm.addEventListener(('submit'), (e) => {
-
     e.preventDefault();
     // store the values of each search criteria in its own variable
     const searchCity = document.getElementById('search-bar-city').value
     const searchState = document.getElementById('search-bar-state').value
     const searchKeyword = document.getElementById('search-bar-keyword').value
+    document.getElementById('background-image').setAttribute('style', "display: none;")
     // conditional for only city criteria
-
     if (searchCity != "" && searchState == "" && searchKeyword == "") {
         const urlEncodedSearchString = encodeURIComponent(searchCity)
 
@@ -171,23 +170,23 @@ function renderResults(resultsArray) {
             <div class="col-12 col-md-6">
                 <div class="card mb-3" style="max-width: 540px;">
                     <div class="row g-0">
-                        <div class="col-md-4">
+                        <div class="col-md-4" >
                             <img src=${currentResult.images[1].url}
                                 class="img-fluid rounded-start" alt="...">
                         </div>  
 
-                            <div class="col-md-8">
-                                <div class="card-body">
+                            <div class="col-md-8 ">
+                                <div class="card-body ">
                                     <h5 class="card-title">${currentResult.name}</h5>
                                     <h6 class="card-date-time">${currentResult.dates.start.localDate}<br> Time: ${currentResult.dates.start.localTime}</h6>
                                     <h6 class="card-location-venue">${currentResult._embedded.venues[0].city.name} @ ${currentResult._embedded.venues[0].name}</h6>
                                     <p class="card-last-update"><small class="text-muted">Last updated:<br>${lastUpdated}</small></p>
-                                    
+                                </div>        
                                     
 
-                            <div class="row">
-                                <div class="col mb-2 ml-2 buttons-event-heart">
-                                <button type"button" class="btn btn-outline-dark" ><a class="buy-tickets"href=${currentResult.url}>Buy Tickets</a></button>
+                                <div class="row">
+                                    <div class="col-4 mb-2 ml-2 buttons-event-heart">
+                                    <button type"button" class="btn btn-outline-dark" ><a class="buy-tickets"href=${currentResult.url}>Buy Tickets</a></button>
                                     <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#details-${currentResult.id}">Event Details</button>
                                     <a data-event-id="${currentResult.id}" style="border-color: white; background-color: white; outline: none;"><svg class="add-event" xmlns="http://www.w3.org/2000/svg" width="50" height="50"
                                         fill="currentColor" class="bi bi-bookmark-heart" viewBox="0 0 16 16"
@@ -324,7 +323,8 @@ function saveToFavorites(eventID) {
     if (favList == null) {
         favList = [];
 
-}console.log(eventObject) 
+}
+    // console.log(eventObject) 
     favList.push(eventObject)
     favListJSON = JSON.stringify(favList);
     localStorage.setItem('event', favListJSON);        
