@@ -58,17 +58,17 @@
         <div class="row">
             <div class="col-12 search" style="margin-top: 15px;">
                 <form id="search-form">
-                    <div class="input-group input-group-md">
+                    <div class="input-group input-group-md justify-content-center">
                         <div>
-                            <input class="form-control search-bar" id="search-bar-keyword" placeholder="Keyword" />
+                            <input class="form-control search-bar" id="search-bar-keyword" placeholder="Keyword" style="width: 250px;" />
                         </div>
                         <!-- created two more input elements and added ids used in for javascript -->
                         <div>
-                            <input class="form-control search-bar" id="search-bar-city" placeholder="City">
+                            <input class="form-control search-bar" id="search-bar-city" placeholder="City" style="width: 250px;">
                         </div>
-                        <div>
+                        <!-- <div> -->
                             <!-- <input class="form-control search-bar" id="search-bar-state" placeholder="Search By State..." /> -->
-                            <select name="search-bar-state" id="search-bar-state">
+                            <select name="form-control search-bar-state" id="search-bar-state" style="width: 250px;" >
 
                                 <!-- added the below options for states -->
                                 <option selected value="">State</option>
@@ -124,10 +124,10 @@
                                 <option value="WI">Wisconsin</option>
                                 <option value="WY">Wyoming</option>
                             </select>
-                        </div>
+                        <!-- </div> -->
                         <!-- added the above options for states -->
                         <div>
-                            <button class="btn btn-dark input-group-btn" type="submit">
+                            <button class="btn btn-dark input-group-btn" type="submit" style="width: 150px;">
                                 Search
                             </button>
                         </div>
@@ -184,7 +184,7 @@
 
     <div class="container">
         <div>
-            <img src="concert.jpg" class="img-fluid" alt="concert crowd front lit from stage lights">
+            <img src="concert.jpg" class="img-fluid" id="background-image" alt="concert crowd front lit from stage lights">
 
         </div>
     </div>

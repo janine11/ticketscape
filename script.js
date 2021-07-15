@@ -1,7 +1,7 @@
 
 let eventDataObject
 document.addEventListener('DOMContentLoaded', (e) => {    
-    console.log('document ready');    
+    // console.log('document ready');    
 
 
     document.addEventListener('click', (e) => {
@@ -52,14 +52,13 @@ function renderMaps(eventsArray) {
 // input and produce the proper results in card format on the page
 const myForm = document.getElementById('search-form');
 myForm.addEventListener(('submit'), (e) => {
-
     e.preventDefault();
     // store the values of each search criteria in its own variable
     const searchCity = document.getElementById('search-bar-city').value
     const searchState = document.getElementById('search-bar-state').value
     const searchKeyword = document.getElementById('search-bar-keyword').value
+    document.getElementById('background-image').setAttribute('style', "display: hidden;")
     // conditional for only city criteria
-
     if (searchCity != "" && searchState == "" && searchKeyword == "") {
         const urlEncodedSearchString = encodeURIComponent(searchCity)
 
@@ -324,7 +323,8 @@ function saveToFavorites(eventID) {
     if (favList == null) {
         favList = [];
 
-}console.log(eventObject) 
+}
+    // console.log(eventObject) 
     favList.push(eventObject)
     favListJSON = JSON.stringify(favList);
     localStorage.setItem('event', favListJSON);        
