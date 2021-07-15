@@ -167,9 +167,7 @@ myForm.addEventListener(('submit'), (e) => {
 function renderResults(resultsArray) {
 
     const resultsHtmlArray = resultsArray.map((currentResult) => {    
-        console.log(currentResult)
-
-        return `
+                return `
             <div class="col-12 col-md-6">
                 <div class="card mb-3" style="max-width: 540px;">
                     <div class="row g-0">
@@ -264,6 +262,7 @@ music.addEventListener('click', (e) => {
         .then(response => response.json())
         .then(eventData => {
             document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)
+            eventDataObject = eventData 
         })
 })
 const sports = document.getElementById('pills-sport-tab')
@@ -274,6 +273,7 @@ sports.addEventListener('click', (e) => {
         .then(response => response.json())
         .then(eventData => {
             document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)
+            eventDataObject = eventData 
         })
 })
 const artTheatre = document.getElementById('pills-artTheatre-tab')
@@ -284,6 +284,7 @@ artTheatre.addEventListener('click', (e) => {
         .then(response => response.json())
         .then(eventData => {
             document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)
+            eventDataObject = eventData 
         })
 })
 const family = document.getElementById('pills-family-tab')
@@ -294,7 +295,7 @@ family.addEventListener('click', (e) => {
     .then(response => response.json())
     .then(eventData =>  {
         document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)            
-
+        eventDataObject = eventData 
         })
 })
 
@@ -309,19 +310,22 @@ document.addEventListener('click', (e) => {
 
 
 function saveToFavorites(eventID) {
+    
     const eventObject = eventDataObject._embedded.events.find((currentEvent) => {
-        return currentEvent.id == eventID                
+        // console.log(currentEvent)
+        return currentEvent.id == eventID
+                       
 
     });
-    let eventJSON = localStorage.getItem('event');
-    let event = JSON.parse(eventJSON);
-    if (event == null) {
-        event = [];
+    let favListJSON = localStorage.getItem('event');
+    let favList = JSON.parse(favListJSON);
+    if (favList == null) {
+        favList = [];
 
-}
-    event.push(eventObject)
-    eventJSON = JSON.stringify(event);
-    localStorage.setItem('event', eventJSON);        
+}console.log(eventObject) 
+    favList.push(eventObject)
+    favListJSON = JSON.stringify(favList);
+    localStorage.setItem('event', favListJSON);        
 
 }
 
