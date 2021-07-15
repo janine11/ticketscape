@@ -11,16 +11,18 @@
     <script src="script.js" async defer></script>
     <link rel="stylesheet" href="style.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <a href="favorites1.html" class="btn btn-light btn-lg fa-pull-right"
-        style="margin: 10px">Favorites
-    </a>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-        <nav class="navbar navbar-dark bg-dark">
-            <span class="navbar-brand mb-0 h1">Live is better.</span>
-        </nav>
+    <nav class="navbar navbar-dark bg-dark">
+        <span class="navbar-brand mb-0 h1">Live is better.</span>
+        <a href="favorites1.html" class="btn btn-light btn-lg fa-pull-right" style="margin: 10px">Favorites
+        </a>
+    </nav>
 
     <!-- modal -->
     <div class="modal fade" id="eventModal" tabindex="-1">
@@ -46,84 +48,89 @@
     <div class="container">
         <div class="container">
             <div class="row">
-                <div class="col-12 header text-center">
-                    <h2 class="display-4">TicketScape</h2>
-                    <p>Search for event you'd like to attend!</p>
-                    <p>Save them to your favorites. Buy tickets when you're
+                <div class="col-12 header text-center heading-text">
+                    <h2 class="display-4" style="margin-top: 15px;">TicketScape</h2>
+                    <p>Save events to your favorites. Buy tickets when you're
                         ready.</p>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-12 search">
+            <div class="col-12 search" style="margin-top: 15px;">
                 <form id="search-form">
-                    <div class="input-group input-group-lg">
-                        <input class="form-control search-bar" id="search-bar-keyword" placeholder="Keyword" />
+                    <div class="input-group input-group-md">
+                        <div>
+                            <input class="form-control search-bar" id="search-bar-keyword" placeholder="Keyword" />
+                        </div>
                         <!-- created two more input elements and added ids used in for javascript -->
-                        <input class="form-control search-bar" id="search-bar-city" placeholder="City">
-                        <!-- <input class="form-control search-bar" id="search-bar-state" placeholder="Search By State..." /> -->
-                        <select name="search-bar-state" id="search-bar-state">
+                        <div>
+                            <input class="form-control search-bar" id="search-bar-city" placeholder="City">
+                        </div>
+                        <div>
+                            <!-- <input class="form-control search-bar" id="search-bar-state" placeholder="Search By State..." /> -->
+                            <select name="search-bar-state" id="search-bar-state">
 
-                            <!-- added the below options for states -->
-                            <option selected value="">State</option>
-                            <option value="AL">Alabama</option>
-                            <option value="AK">Alaska</option>
-                            <option value="AZ">Arizona</option>
-                            <option value="AR">Arkansas</option>
-                            <option value="CA">California</option>
-                            <option value="CO">Colorado</option>
-                            <option value="CT">Connecticut</option>
-                            <option value="DE">Delaware</option>
-                            <option value="DC">District Of Columbia</option>
-                            <option value="FL">Florida</option>
-                            <option value="GA">Georgia</option>
-                            <option value="HI">Hawaii</option>
-                            <option value="ID">Idaho</option>
-                            <option value="IL">Illinois</option>
-                            <option value="IN">Indiana</option>
-                            <option value="IA">Iowa</option>
-                            <option value="KS">Kansas</option>
-                            <option value="KY">Kentucky</option>
-                            <option value="LA">Louisiana</option>
-                            <option value="ME">Maine</option>
-                            <option value="MD">Maryland</option>
-                            <option value="MA">Massachusetts</option>
-                            <option value="MI">Michigan</option>
-                            <option value="MN">Minnesota</option>
-                            <option value="MS">Mississippi</option>
-                            <option value="MO">Missouri</option>
-                            <option value="MT">Montana</option>
-                            <option value="NE">Nebraska</option>
-                            <option value="NV">Nevada</option>
-                            <option value="NH">New Hampshire</option>
-                            <option value="NJ">New Jersey</option>
-                            <option value="NM">New Mexico</option>
-                            <option value="NY">New York</option>
-                            <option value="NC">North Carolina</option>
-                            <option value="ND">North Dakota</option>
-                            <option value="OH">Ohio</option>
-                            <option value="OK">Oklahoma</option>
-                            <option value="OR">Oregon</option>
-                            <option value="PA">Pennsylvania</option>
-                            <option value="RI">Rhode Island</option>
-                            <option value="SC">South Carolina</option>
-                            <option value="SD">South Dakota</option>
-                            <option value="TN">Tennessee</option>
-                            <option value="TX">Texas</option>
-                            <option value="UT">Utah</option>
-                            <option value="VT">Vermont</option>
-                            <option value="VA">Virginia</option>
-                            <option value="WA">Washington</option>
-                            <option value="WV">West Virginia</option>
-                            <option value="WI">Wisconsin</option>
-                            <option value="WY">Wyoming</option>
-                        </select>
+                                <!-- added the below options for states -->
+                                <option selected value="">State</option>
+                                <option value="AL">Alabama</option>
+                                <option value="AK">Alaska</option>
+                                <option value="AZ">Arizona</option>
+                                <option value="AR">Arkansas</option>
+                                <option value="CA">California</option>
+                                <option value="CO">Colorado</option>
+                                <option value="CT">Connecticut</option>
+                                <option value="DE">Delaware</option>
+                                <option value="DC">District Of Columbia</option>
+                                <option value="FL">Florida</option>
+                                <option value="GA">Georgia</option>
+                                <option value="HI">Hawaii</option>
+                                <option value="ID">Idaho</option>
+                                <option value="IL">Illinois</option>
+                                <option value="IN">Indiana</option>
+                                <option value="IA">Iowa</option>
+                                <option value="KS">Kansas</option>
+                                <option value="KY">Kentucky</option>
+                                <option value="LA">Louisiana</option>
+                                <option value="ME">Maine</option>
+                                <option value="MD">Maryland</option>
+                                <option value="MA">Massachusetts</option>
+                                <option value="MI">Michigan</option>
+                                <option value="MN">Minnesota</option>
+                                <option value="MS">Mississippi</option>
+                                <option value="MO">Missouri</option>
+                                <option value="MT">Montana</option>
+                                <option value="NE">Nebraska</option>
+                                <option value="NV">Nevada</option>
+                                <option value="NH">New Hampshire</option>
+                                <option value="NJ">New Jersey</option>
+                                <option value="NM">New Mexico</option>
+                                <option value="NY">New York</option>
+                                <option value="NC">North Carolina</option>
+                                <option value="ND">North Dakota</option>
+                                <option value="OH">Ohio</option>
+                                <option value="OK">Oklahoma</option>
+                                <option value="OR">Oregon</option>
+                                <option value="PA">Pennsylvania</option>
+                                <option value="RI">Rhode Island</option>
+                                <option value="SC">South Carolina</option>
+                                <option value="SD">South Dakota</option>
+                                <option value="TN">Tennessee</option>
+                                <option value="TX">Texas</option>
+                                <option value="UT">Utah</option>
+                                <option value="VT">Vermont</option>
+                                <option value="VA">Virginia</option>
+                                <option value="WA">Washington</option>
+                                <option value="WV">West Virginia</option>
+                                <option value="WI">Wisconsin</option>
+                                <option value="WY">Wyoming</option>
+                            </select>
+                        </div>
                         <!-- added the above options for states -->
-
-
-                        <button class="btn btn-dark input-group-btn" type="submit">
-                            Search
-                        </button>
+                        <div>
+                            <button class="btn btn-dark input-group-btn" type="submit">
+                                Search
+                            </button>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -134,12 +141,13 @@
                 <div class="col-12 justify-content-center">
                     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                         <li class="nav-item">
-                            <a style="color: black;"    class="nav-link" id="pills-music-tab" data-toggle="pill" href="#pills-music"
-                                role="tab" aria-controls="pills-music" aria-selected="true"><i class="fa fa-music"></i>&nbspMusic</a>
+                            <a style="color: black;" class="nav-link" id="pills-music-tab" data-toggle="pill"
+                                href="#pills-music" role="tab" aria-controls="pills-music" aria-selected="true"><i
+                                    class="fa fa-music"></i>&nbspMusic</a>
                         </li>
                         <li class="nav-item">
-                            <a style="color: black;" class="nav-link" id="pills-sport-tab" data-toggle="pill" href="#pills-sport" role="tab"
-                                aria-controls="pills-sport" aria-selected="false"><i
+                            <a style="color: black;" class="nav-link" id="pills-sport-tab" data-toggle="pill"
+                                href="#pills-sport" role="tab" aria-controls="pills-sport" aria-selected="false"><i
                                     class="fas fa-basketball-ball"></i>&nbspSports</a>
                         </li>
                         <!-- <li class="nav-item">
@@ -173,11 +181,11 @@
         <div class="results row" id="results-box">
         </div>
     </div>
-  
+
     <div class="container">
         <div>
-            <img src="concert.jpg"
-            class="img-fluid" alt="concert crowd front lit from stage lights">
+            <img src="concert.jpg" class="img-fluid" alt="concert crowd front lit from stage lights">
+
         </div>
     </div>
 
@@ -192,7 +200,7 @@
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    
+
     <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkoylVvZXvTjhW1WlbW8_iGIQHhD_H0ts&libraries=&v=weekly"
         async></script>
