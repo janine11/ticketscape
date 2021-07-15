@@ -11,6 +11,9 @@
     <script src="script.js" async defer></script>
     <link rel="stylesheet" href="style.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <a href="favorites1.html" class="btn btn-light btn-lg fa-pull-right"
+        style="margin: 10px">Favorites
+    </a>
 </head>
 
 <body>
@@ -118,7 +121,7 @@
                         <!-- added the above options for states -->
 
 
-                        <button class="btn btn-primary input-group-btn" type="submit">
+                        <button class="btn btn-dark input-group-btn" type="submit">
                             Search
                         </button>
                     </div>
@@ -131,24 +134,23 @@
                 <div class="col-12 justify-content-center">
                     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" id="pills-music-tab" data-toggle="pill" href="#pills-music"
-                                role="tab" aria-controls="pills-music" aria-selected="true"><i
-                                    class="fa fa-music"></i>&nbspMusic</a>
+                            <a style="color: black;"    class="nav-link" id="pills-music-tab" data-toggle="pill" href="#pills-music"
+                                role="tab" aria-controls="pills-music" aria-selected="true"><i class="fa fa-music"></i>&nbspMusic</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="pills-sport-tab" data-toggle="pill" href="#pills-sport" role="tab"
+                            <a style="color: black;" class="nav-link" id="pills-sport-tab" data-toggle="pill" href="#pills-sport" role="tab"
                                 aria-controls="pills-sport" aria-selected="false"><i
-                                    class="fas fa-basketball-ball"></i>&nbspSport</a>
+                                    class="fas fa-basketball-ball"></i>&nbspSports</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                        <!-- <li class="nav-item">
+                            <a style="color: black;" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
                                 aria-haspopup="true" aria-expanded="false">More</a>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" id="pills-artTheatre-tab" data-toggle="pill"
                                     href="#">Art&Theatre</a>
                                 <a class="dropdown-item" id="pills-family-tab" data-toggle="pill" href="#">Family</a>
                             </div>
-                        </li>
+                        </li> -->
                 </div>
                 </ul>
                 <div class="tab-content" id="pills-tabContent">
@@ -171,15 +173,14 @@
         <div class="results row" id="results-box">
         </div>
     </div>
-
-
-    
+  
     <div class="container">
         <div>
             <img src="concert.jpg"
             class="img-fluid" alt="concert crowd front lit from stage lights">
         </div>
     </div>
+
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -191,9 +192,9 @@
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="google.js" async defer></script>
+    
     <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkoylVvZXvTjhW1WlbW8_iGIQHhD_H0ts&callback=initMap&libraries=&v=weekly"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkoylVvZXvTjhW1WlbW8_iGIQHhD_H0ts&libraries=&v=weekly"
         async></script>
 </body>
 

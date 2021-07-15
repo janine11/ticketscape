@@ -1,5 +1,8 @@
-document.addEventListener('DOMContentLoaded', (e) => {
-    console.log('document ready');
+
+let eventDataObject
+document.addEventListener('DOMContentLoaded', (e) => {    
+    console.log('document ready');    
+
 
     document.addEventListener('click', (e) => {
         // will need to add a class to each button called add button  
@@ -13,7 +16,36 @@ document.addEventListener('DOMContentLoaded', (e) => {
 })
 // store information regarding the last time the results were updated.
 const lastUpdated = document.lastModified;
+function renderMapLat(resultsArray) {
+    const resultsMapArray = resultsArray.map((currentResult) => {   
+        let latitude = currentResult._embedded.venues[0].location.latitude;
+        return latitude 
 
+    })
+    return resultsMapArray.join('');
+}
+function renderMaps(eventsArray) {
+    eventsArray.forEach((currentEvent) => {   
+        initMap(parseInt(currentEvent._embedded.venues[0].location.latitude),parseInt(currentEvent._embedded.venues[0].location.longitude), `map-${currentEvent.id}` )
+
+    })
+  
+}
+
+ function initMap(latitude, longitude, id) { 
+        
+    const uluru = { lat: latitude, lng: longitude };
+    // The map, centered at Uluru
+    const map = new google.maps.Map(document.getElementById(id || "map"), {
+        zoom: 4,
+        center: uluru,
+    });
+    // The marker, positioned at Uluru
+    const marker = new google.maps.Marker({
+        position: uluru,
+        map: map,
+    });
+}
 
 
 // create a listener for the search bar that will take any combination of
@@ -35,7 +67,8 @@ myForm.addEventListener(('submit'), (e) => {
     .then(response => response.json())
     .then(eventData =>    {
         document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)      
-        eventDataObject = eventData 
+        eventDataObject = eventData              
+        renderMaps(eventData._embedded.events) 
         })
 } 
     // conditional for state only criteria
@@ -45,7 +78,7 @@ myForm.addEventListener(('submit'), (e) => {
     .then(response => response.json())
     .then(eventData =>    {
         document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)
-        console.log(eventData)
+        renderMaps(eventData._embedded.events)
         eventDataObject = eventData       
     })
     }
@@ -61,8 +94,9 @@ myForm.addEventListener(('submit'), (e) => {
         else {
             document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)
         }
+        renderMaps(eventData._embedded.events)
         eventDataObject = eventData 
-        console.log(eventDataObject)           
+                 
     })
 
     }
@@ -75,7 +109,7 @@ myForm.addEventListener(('submit'), (e) => {
     .then(response => response.json())
     .then(eventData =>    {
         document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)
-        console.log(eventData)
+        renderMaps(eventData._embedded.events)
         eventDataObject = eventData           
     })
     }
@@ -88,7 +122,7 @@ myForm.addEventListener(('submit'), (e) => {
     .then(response => response.json())
     .then(eventData =>    {
         document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)
-        console.log(eventData)
+        renderMaps(eventData._embedded.events)
         eventDataObject = eventData             
     })
 
@@ -102,7 +136,7 @@ myForm.addEventListener(('submit'), (e) => {
     .then(response => response.json())
     .then(eventData =>    {
         document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)
-        console.log(eventData)    
+        renderMaps(eventData._embedded.events)    
         eventDataObject = eventData       
     })
 
@@ -117,7 +151,7 @@ myForm.addEventListener(('submit'), (e) => {
     .then(response => response.json())
     .then(eventData =>    {
         document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)
-        console.log(eventData) 
+        renderMaps(eventData._embedded.events)
         eventDataObject = eventData           
     })
     }
@@ -131,26 +165,30 @@ myForm.addEventListener(('submit'), (e) => {
 // create a function that will take the array of results and make a new card
 // for each result to include certain information about the event
 function renderResults(resultsArray) {
-    const resultsHtmlArray = resultsArray.map((currentResult) => {
-        console.log(currentResult)
-        return `
+
+    const resultsHtmlArray = resultsArray.map((currentResult) => {    
+                return `
             <div class="col-12 col-md-6">
                 <div class="card mb-3" style="max-width: 540px;">
                     <div class="row g-0">
                         <div class="col-md-4">
                             <img src=${currentResult.images[1].url}
                                 class="img-fluid rounded-start" alt="...">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">${currentResult.name}</h5>
-                                <h6 class="card-date-time">${currentResult.dates.start.localDate}<br> Time: ${currentResult.dates.start.localTime}</h6>
-                                <h6 class="card-location-venue">${currentResult._embedded.venues[0].name}</h6>
-                                <p class="card-last-update"><small class="text-muted">Last updated:<br>${lastUpdated}</small></p>
-                            </div>
+                        </div>  
+
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">${currentResult.name}</h5>
+                                    <h6 class="card-date-time">${currentResult.dates.start.localDate}<br> Time: ${currentResult.dates.start.localTime}</h6>
+                                    <h6 class="card-location-venue">${currentResult._embedded.venues[0].city.name} @ ${currentResult._embedded.venues[0].name}</h6>
+                                    <p class="card-last-update"><small class="text-muted">Last updated:<br>${lastUpdated}</small></p>
+                                    
+                                    
+
                             <div class="row">
                                 <div class="col mb-2 ml-2 buttons-event-heart">
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#details-${currentResult.id}">Event Details</button>
+                                <button type"button" class="btn btn-outline-dark" ><a class="buy-tickets"href=${currentResult.url}>Buy Tickets</a></button>
+                                    <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#details-${currentResult.id}">Event Details</button>
                                     <a data-event-id="${currentResult.id}" style="border-color: white; background-color: white; outline: none;"><svg class="add-event" xmlns="http://www.w3.org/2000/svg" width="50" height="50"
                                         fill="currentColor" class="bi bi-bookmark-heart" viewBox="0 0 16 16"
                                         justify-content-right>
@@ -182,19 +220,17 @@ function renderResults(resultsArray) {
                         <div class="modal-body">
                             <div class="row g-0">
                                 <div class="col-md-4">
-                                    <img src="https://images.pexels.com/photos/3408744/pexels-photo-3408744.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+                                    <img src=${currentResult.images[1].url}
                                         class="img-fluid rounded-start" alt="...">
-                                    <img src="https://images.pexels.com/photos/7009479/pexels-photo-7009479.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
-                                        class="img-fluid rounded-start" alt="...">
+                                    
+
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
-                                        <h5 class="card-title">Better Than Ezra</h5>
-                                        <h6 class="card-date-time">January 6, 2021 - 7:30pm</h6>
-                                        <h6 class="card-location-venue">Atlanta, GA @ State Farm Arena</h6>
-                                        <p class="card-ticketprice">$0-360</p>
-                                        <p class="card-last-update"><small class="text-muted">Last updated 3 mins
-                                                ago</small></p>
+                                        <h5 class="card-title">${currentResult.name}</h5>
+                                        <h6 class="card-date-time">${currentResult.dates.start.localDate}<br> Time: ${currentResult.dates.start.localTime}</h6>
+                                        <h6 class="card-location-venue">${currentResult._embedded.venues[0].city.name} @ ${currentResult._embedded.venues[0].name}</h6>                                        
+                                        <p class="card-last-update"><small class="text-muted">${lastUpdated}</small></p>
                                     </div>
                                     <div class="row">
                                         <div class="col mb-2 ml-2 buttons-event-heart">               
@@ -202,18 +238,18 @@ function renderResults(resultsArray) {
                                     </div>
                                 </div>
                             </div>
-                            <div class="map"> 
-                            MAP goes here
+                            <div style="height: 125px; width: 250px;" id="map-${currentResult.id}"></div> 
+                            
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <a href="" class="btn btn-primary">Buy Tickets</a>
+                            
                         </div>
                     </div>
                 </div>
-            </div>
-            `
+            </div>`
+
 
 
     })
@@ -228,6 +264,7 @@ music.addEventListener('click', (e) => {
         .then(response => response.json())
         .then(eventData => {
             document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)
+            eventDataObject = eventData 
         })
 })
 const sports = document.getElementById('pills-sport-tab')
@@ -238,29 +275,31 @@ sports.addEventListener('click', (e) => {
         .then(response => response.json())
         .then(eventData => {
             document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)
+            eventDataObject = eventData 
         })
 })
-const artTheatre = document.getElementById('pills-artTheatre-tab')
-artTheatre.addEventListener('click', (e) => {
+// const artTheatre = document.getElementById('pills-artTheatre-tab')
+// artTheatre.addEventListener('click', (e) => {
 
-    e.preventDefault()
-    fetch(`https://app.ticketmaster.com/discovery/v2/events.json?classificationName=arts&apikey=TB1crWfpFo6usraxXEiFhOrljk8GgugE`)
-        .then(response => response.json())
-        .then(eventData => {
-            document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)
-        })
-})
-const family = document.getElementById('pills-family-tab')
+//     e.preventDefault()
+//     fetch(`https://app.ticketmaster.com/discovery/v2/events.json?classificationName=arts&apikey=TB1crWfpFo6usraxXEiFhOrljk8GgugE`)
+//         .then(response => response.json())
+//         .then(eventData => {
+//             document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)
+//             eventDataObject = eventData 
+//         })
+// })
+// const family = document.getElementById('pills-family-tab')
 
-family.addEventListener('click', (e) => {    
-    e.preventDefault()
-    fetch(`https://app.ticketmaster.com/discovery/v2/events.json?classificationName=family&apikey=TB1crWfpFo6usraxXEiFhOrljk8GgugE`)
-    .then(response => response.json())
-    .then(eventData =>  {
-        document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)            
-
-        })
-})
+// family.addEventListener('click', (e) => {    
+//     e.preventDefault()
+//     fetch(`https://app.ticketmaster.com/discovery/v2/events.json?classificationName=family&apikey=TB1crWfpFo6usraxXEiFhOrljk8GgugE`)
+//     .then(response => response.json())
+//     .then(eventData =>  {
+//         document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)            
+//         eventDataObject = eventData 
+//         })
+// })
 
 document.addEventListener('click', (e) => {  
         // will need to add a class to each button called add button  
@@ -269,23 +308,26 @@ document.addEventListener('click', (e) => {
         let eventID = e.target.dataset.eventId        
         saveToFavorites(eventID)
     } 
-}) 
+})
+
 
 function saveToFavorites(eventID) {
-
-    console.log(eventDataObject)
+    
     const eventObject = eventDataObject._embedded.events.find((currentEvent) => {
-        return currentEvent.id == eventID                
+        // console.log(currentEvent)
+        return currentEvent.id == eventID
+                       
 
     });
-    let eventJSON = localStorage.getItem('event');
-    let event = JSON.parse(eventJSON);
-    if (event == null) {
-        event = [];
+    let favListJSON = localStorage.getItem('event');
+    let favList = JSON.parse(favListJSON);
+    if (favList == null) {
+        favList = [];
+
+}console.log(eventObject) 
+    favList.push(eventObject)
+    favListJSON = JSON.stringify(favList);
+    localStorage.setItem('event', favListJSON);        
 
 }
-    event.push(eventObject)
-    eventJSON = JSON.stringify(event);
-    localStorage.setItem('event', eventJSON);        
 
-}
