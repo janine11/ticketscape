@@ -183,10 +183,12 @@ function renderResults(resultsArray) {
                                     <h6 class="card-location-venue">${currentResult._embedded.venues[0].city.name} @ ${currentResult._embedded.venues[0].name}</h6>
                                     <p class="card-last-update"><small class="text-muted">Last updated:<br>${lastUpdated}</small></p>
                                     
+                                    
 
                             <div class="row">
                                 <div class="col mb-2 ml-2 buttons-event-heart">
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#details-${currentResult.id}">Event Details</button>
+                                <button type"button" class="btn btn-outline-dark" ><a class="buy-tickets"href=${currentResult.url}>Buy Tickets</a></button>
+                                    <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#details-${currentResult.id}">Event Details</button>
                                     <a data-event-id="${currentResult.id}" style="border-color: white; background-color: white; outline: none;"><svg class="add-event" xmlns="http://www.w3.org/2000/svg" width="50" height="50"
                                         fill="currentColor" class="bi bi-bookmark-heart" viewBox="0 0 16 16"
                                         justify-content-right>
@@ -236,13 +238,13 @@ function renderResults(resultsArray) {
                                     </div>
                                 </div>
                             </div>
-                            <div style="height: 100px;" id="map-${currentResult.id}"></div> 
-                            MAP goes here
+                            <div style="height: 125px; width: 250px;" id="map-${currentResult.id}"></div> 
+                            
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <a href="" class="btn btn-primary">Buy Tickets</a>
+                            
                         </div>
                     </div>
                 </div>
@@ -276,28 +278,28 @@ sports.addEventListener('click', (e) => {
             eventDataObject = eventData 
         })
 })
-const artTheatre = document.getElementById('pills-artTheatre-tab')
-artTheatre.addEventListener('click', (e) => {
+// const artTheatre = document.getElementById('pills-artTheatre-tab')
+// artTheatre.addEventListener('click', (e) => {
 
-    e.preventDefault()
-    fetch(`https://app.ticketmaster.com/discovery/v2/events.json?classificationName=arts&apikey=TB1crWfpFo6usraxXEiFhOrljk8GgugE`)
-        .then(response => response.json())
-        .then(eventData => {
-            document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)
-            eventDataObject = eventData 
-        })
-})
-const family = document.getElementById('pills-family-tab')
+//     e.preventDefault()
+//     fetch(`https://app.ticketmaster.com/discovery/v2/events.json?classificationName=arts&apikey=TB1crWfpFo6usraxXEiFhOrljk8GgugE`)
+//         .then(response => response.json())
+//         .then(eventData => {
+//             document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)
+//             eventDataObject = eventData 
+//         })
+// })
+// const family = document.getElementById('pills-family-tab')
 
-family.addEventListener('click', (e) => {    
-    e.preventDefault()
-    fetch(`https://app.ticketmaster.com/discovery/v2/events.json?classificationName=family&apikey=TB1crWfpFo6usraxXEiFhOrljk8GgugE`)
-    .then(response => response.json())
-    .then(eventData =>  {
-        document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)            
-        eventDataObject = eventData 
-        })
-})
+// family.addEventListener('click', (e) => {    
+//     e.preventDefault()
+//     fetch(`https://app.ticketmaster.com/discovery/v2/events.json?classificationName=family&apikey=TB1crWfpFo6usraxXEiFhOrljk8GgugE`)
+//     .then(response => response.json())
+//     .then(eventData =>  {
+//         document.getElementById('results-box').innerHTML = renderResults(eventData._embedded.events)            
+//         eventDataObject = eventData 
+//         })
+// })
 
 document.addEventListener('click', (e) => {  
         // will need to add a class to each button called add button  

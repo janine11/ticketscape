@@ -1,12 +1,13 @@
 /* Set the size of the div element that contains the map */
-#map {
-    height: 100px;
-    /* The height is 400 pixels */
-    width: 25%;
-    /* The width is the width of the web page */
-  }
+
 
 .buttons-event-heart {
     display: flex;
     justify-content: space-between;
+}
+.buy-tickets{
+  color: Grey;
+}
+.buy-tickets:hover {
+  color: white;
 }
